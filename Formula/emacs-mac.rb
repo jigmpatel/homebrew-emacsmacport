@@ -7,6 +7,7 @@ class EmacsMac < Formula
 
   head "https://bitbucket.org/mituharu/emacs-mac.git", branch: "work"
 
+  option "with-gnutls", "Build with gnutls support"
   option "with-dbus", "Build with d-bus support"
   option "without-modules", "Build without dynamic modules support"
   option "with-rsvg", "Build with rsvg support"
@@ -52,7 +53,7 @@ class EmacsMac < Formula
   depends_on "autoconf"
   depends_on "automake"
   depends_on "d-bus" if build.with? "dbus"
-  depends_on "gnutls"
+  depends_on "gnutls" if build.with? "gnutls"
   depends_on "librsvg" if build.with? "rsvg"
   depends_on "pkg-config"
   depends_on "texinfo"
@@ -142,8 +143,8 @@ class EmacsMac < Formula
       "--prefix=#{prefix}",
       "--with-mac",
       "--enable-mac-app=#{prefix}",
-      "--with-gnutls",
     ]
+    args << "with-gnutls" if build.with? "gnutls"
     args << "--with-modules" unless build.without? "modules"
     args << "--with-rsvg" if build.with? "rsvg"
 
