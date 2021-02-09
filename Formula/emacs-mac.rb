@@ -143,8 +143,8 @@ class EmacsMac < Formula
       "--prefix=#{prefix}",
       "--with-mac",
       "--enable-mac-app=#{prefix}",
+      "--with-gnutls=ifavailable",
     ]
-    args << "with-gnutls" if build.with? "gnutls"
     args << "--with-modules" unless build.without? "modules"
     args << "--with-rsvg" if build.with? "rsvg"
 
